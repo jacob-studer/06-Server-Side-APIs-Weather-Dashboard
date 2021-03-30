@@ -7,3 +7,8 @@
 .title {
     display: inline;
 }
+
+li {
+    text-decoration: none;
+    list-style: none;
+}
