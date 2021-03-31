@@ -71,6 +71,7 @@ function searchCurrentWeather(query) {
     })
 }
 
+//another api call using lat/lon keys from coord object as parameters in url, print too uv index. create if/else statement for colored bar using logical comparison operators
 
 function searchForecast(query) {
     var weatherQueryUrl = 'https://api.openweathermap.org/data/2.5/forecast' 
@@ -107,8 +108,7 @@ function printCurrentWeather(weatherRes) {
 
     cityTitleEl.textContent = weatherRes.name;
     dateTitleEl.textContent = moment.unix(weatherRes.dt).format('l');
-    console.log (dateTitleEl);
-    weatherIconEl.textContent = weatherRes.weather.icon;
+    weatherIconEl.innerHTML = `<img src='https://openweathermap.org/img/w/${weatherRes.weather.icon}.png`;
     weatherTempEl.textContent = 'Temperature: ' + weatherRes.main.temp + ' F°';
     weatherHumidityEl.textContent = 'Humidity: ' + weatherRes.main.humidity + ' %';
     weatherWindEl.textContent = 'wind speed: ' + weatherRes.wind.speed + ' MPH';
@@ -165,5 +165,5 @@ function printForecast(forecastRes) {
 
 generateButtons()
 
-searchFormEl.addEventListener('click', handleSearchFormSubmit); //enter still works?
+searchFormEl.addEventListener('click', handleSearchFormSubmit); 
 

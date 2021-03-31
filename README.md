@@ -42,8 +42,8 @@ THEN I am again presented with current and future conditions for that city
 ```
 
 ## Screenshots
-![screenshot-1](https://raw.githubusercontent.com/jacob-studer/05-Third-Party-APIs-Work-Day-Scheduler/main/Assets/images/Capture.PNG)
+![screenshot-1](https://raw.githubusercontent.com/jacob-studer/06-Server-Side-APIs-Weather-Dashboard/main/assets/images/screenshot%201.PNG)
 
 ## Links
 https://github.com/jacob-studer/06-Server-Side-APIs-Weather-Dashboard
-https://jacob-studer.github.io/05-Third-Party-APIs-Work-Day-Scheduler/
+https://jacob-studer.github.io/06-Server-Side-APIs-Weather-Dashboard/
