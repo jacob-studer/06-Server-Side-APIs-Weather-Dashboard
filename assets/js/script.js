@@ -20,6 +20,8 @@ function handleSearchCitySubmit(event) {
     event.preventDefault();
     console.log('works');
 
+    $('.card-vis-rule').show()
+
     var searchInputVal = this.textContent;
 
     getParams(searchInputVal)
@@ -29,8 +31,15 @@ function handleSearchFormSubmit(event) {
     event.preventDefault();
     console.log('works');
 
+    $('.card-vis-rule').show();
+    
+
     var searchInputVal = document.querySelector('.search-input').value;
 
+//create modal for error 
+
+
+//how to not have unhide with no input
     if (!searchInputVal) {
         return window.alert('Please enter a City to search for.')
     } 
@@ -48,6 +57,7 @@ function getParams(query){
     }
     searchForecast(query); 
     searchCurrentWeather(query);
+
 }
 
 function searchCurrentWeather(query) {
@@ -68,7 +78,29 @@ function searchCurrentWeather(query) {
 
     .then(function (weatherRes) {
         printCurrentWeather(weatherRes);
-    })
+        searchUV(weatherRes);
+    
+        function searchUV(weatherRes) {
+            var uvQueryUrl = 'http://api.openweathermap.org/data/2.5/uv' //i?lat={lat}&lon={lon}&appid={API key}' 
+        
+            uvQueryUrl = uvQueryUrl + 'i?lat=' + weatherRes.coord.lat + '&lon=' + weatherRes.coord.lon + '&appid=' + apiKey;
+        
+            fetch(uvQueryUrl)
+            .then(function (response) {
+                console.log(response.ok);
+                if(!response.ok) {
+                    
+                    throw response.json();
+                }
+        
+                return response.json()
+            })
+        
+            .then(function (uvRes) {
+                printUV(uvRes);
+            
+            })
+    }})
 }
 
 //another api call using lat/lon keys from coord object as parameters in url, print too uv index. create if/else statement for colored bar using logical comparison operators
@@ -104,16 +136,20 @@ function printCurrentWeather(weatherRes) {
     var weatherTempEl = document.querySelector('.weather-temp');
     var weatherHumidityEl = document.querySelector('.weather-humidity');
     var weatherWindEl = document.querySelector('.weather-wind');
-    var weatherUVEl = document.querySelector('.weather-uv');
 
     cityTitleEl.textContent = weatherRes.name;
     dateTitleEl.textContent = moment.unix(weatherRes.dt).format('l');
-    weatherIconEl.innerHTML = `<img src='https://openweathermap.org/img/w/${weatherRes.weather.icon}.png`;
+    weatherIconEl.innerHTML = `<img src='https://openweathermap.org/img/w/${weatherRes.weather[0].icon}.png`;
     weatherTempEl.textContent = 'Temperature: ' + weatherRes.main.temp + ' F°';
     weatherHumidityEl.textContent = 'Humidity: ' + weatherRes.main.humidity + ' %';
     weatherWindEl.textContent = 'wind speed: ' + weatherRes.wind.speed + ' MPH';
-    weatherUVEl.textContent = 'UV Index: ' + weatherRes.main.temp;
 
+}
+
+function printUV (uvRes) {
+    console.log(uvRes);
+    var weatherUVEl = document.querySelector('.weather-uv');
+    weatherUVEl.textContent = 'UV Index: ' + uvRes.value;
 }
 
 function printForecast(forecastRes) {

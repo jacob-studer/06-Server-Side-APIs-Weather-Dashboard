@@ -1,11 +1,18 @@
+body {
+    background-image: url('../images/city-weather-pic.PNG');
+    background-size: cover;
+    font-weight: bold;
+}
+
 .jumbotron-fluid {
     padding:1%;
     margin: 0%;
     text-align: center;
+    font-weight: bold;
 }
 
-.title {
-    display: inline;
+.jumbotron span {
+    font-family: 'Pacifico', cursive;
 }
 
 li {
@@ -13,3 +20,49 @@ li {
     list-style: none;
 }
 
+ul {
+    padding: 0%;
+}
+
+
+.card {
+    border: solid 2px black;
+    background: rgb(45,90,170);
+    background: linear-gradient(90deg, rgba(45,90,170,1) 12%, rgba(104,163,240,1) 52%, rgba(26,84,184,1) 91%);
+}
+
+.card-vis-rule {
+    display: none;
+}
+
+.body-cards{
+    margin-top: 2%;
+}
+
+/* .card-body {
+    padding: 2%;
+} */
+
+.jumbotron {
+    background: rgb(45,90,170);
+    background: linear-gradient(90deg, rgba(45,90,170,1) 12%, rgba(104,163,240,1) 52%, rgba(26,84,184,1) 91%);
+    /* background-image: url('https://urbanize.city/la/sites/urbanize.city.la/files/styles/2018_article_image_1140x538/public/2900%20Wilshire%20by%20Hunter%20Kerhart%2005.jpg?itok=2V8qH-Ak'); */
+}
+
+.btn{
+    border: solid 2px black;
+    background: rgb(45,90,170);
+    background: linear-gradient(90deg, rgba(45,90,170,1) 12%, rgba(104,163,240,1) 52%, rgba(26,84,184,1) 91%);
+    /* padding: 2px; */
+    font-weight: bold;
+}
+
+.search-form {
+    color: black;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.input {
+    border-radius: 5em;
+}
