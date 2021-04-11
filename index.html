@@ -36,15 +36,20 @@
                     <div class="search">
                         <label for="cityInput">Search for a City:</label>
                         <br>
-                        <input type="text" class="search-input" id="cityInput">
+                        <input type="text" class="search-input" id="cityInput" placeholder="What City?">   
                             <div>
                             <button class="btn btn-outline-secondary search-form" type="submit">Search</button>
                             </div>
                     </div>
                 </form>
-                <div class="btn-group-vertical" role="group">
+
+                <div>
+                    <label for="search-form" class="rs-label">Recent Searches:</label>
+                    <div class="btn-group-vertical" role="group">
                     
+                    </div>
                 </div>
+                
             </section>
 
             <section class="col-12 col-md-8 col-lg-9 body-cards">
@@ -54,10 +59,9 @@
                     <div class="city-date-container card-body">
                         <div class="title">
                             <span>
-                                <h3>Current Weather for:</h3>
-                                <h3 class="city-title"></h3> 
-                                <h3 class="date-title"></h3>
-                            </span>
+                                <h3>Current Weather for: <span class="city-title"></span><span>, </span><span class="country-title"></span></h3>
+                            </span><span class="country-title"></span>
+                            <h3>Today, <span class="date-title"></span></h3>
                             <h5 class="weather-icon"></h5>
                         </div>   
                             <ul>

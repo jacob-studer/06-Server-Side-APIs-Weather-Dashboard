@@ -7,7 +7,8 @@ var searchHistoryArr = JSON.parse(localStorage.getItem('previousSearch')) || [];
 
 function generateButtons(){
     var btnGroup = document.querySelector('.btn-group-vertical');
-    searchHistoryArr.reverse().forEach(function(city){
+    btnGroup.innerHTML = "";
+    searchHistoryArr.forEach(function(city){
         var cityBtn = document.createElement('button');
         cityBtn.textContent = city;
         cityBtn.classList.add('btn');
@@ -51,10 +52,22 @@ function handleSearchFormSubmit(event) {
 function getParams(query){
     console.log(query);
 
-    if (searchHistoryArr.length <= 4) {
-        searchHistoryArr.push(query);
+    if (searchHistoryArr.length >= 4) {
+        searchHistoryArr.pop();
+        searchHistoryArr.unshift(query);
         localStorage.setItem('previousSearch', JSON.stringify(searchHistoryArr));
+
+        generateButtons();
+
+        searchForecast(query); 
+        searchCurrentWeather(query);
+        return
     }
+
+    searchHistoryArr.unshift(query);
+    localStorage.setItem('previousSearch', JSON.stringify(searchHistoryArr));
+    generateButtons();
+
     searchForecast(query); 
     searchCurrentWeather(query);
 
@@ -131,6 +144,7 @@ function searchForecast(query) {
 function printCurrentWeather(weatherRes) {
     console.log(weatherRes);
     var cityTitleEl = document.querySelector('.city-title');
+    var countryTitleEl = document.querySelector('.country-title');
     var dateTitleEl = document.querySelector('.date-title');
     var weatherIconEl = document.querySelector('.weather-icon');
     var weatherTempEl = document.querySelector('.weather-temp');
@@ -138,8 +152,9 @@ function printCurrentWeather(weatherRes) {
     var weatherWindEl = document.querySelector('.weather-wind');
 
     cityTitleEl.textContent = weatherRes.name;
+    countryTitleEl.textContent = weatherRes.sys.country;
     dateTitleEl.textContent = moment.unix(weatherRes.dt).format('l');
-    weatherIconEl.innerHTML = `<img src='https://openweathermap.org/img/w/${weatherRes.weather[0].icon}.png`;
+    weatherIconEl.innerHTML = `<img src='https://openweathermap.org/img/w/${weatherRes.weather[0].icon}.png'>`;
     weatherTempEl.textContent = 'Temperature: ' + weatherRes.main.temp + ' F°';
     weatherHumidityEl.textContent = 'Humidity: ' + weatherRes.main.humidity + ' %';
     weatherWindEl.textContent = 'wind speed: ' + weatherRes.wind.speed + ' MPH';
@@ -177,26 +192,26 @@ function printForecast(forecastRes) {
 
     console.log(forecastRes);
 
-    forecastDate1.textContent = moment.unix(forecastRes.list[0].dt).format('l');
+    forecastDate1.textContent = moment.unix(forecastRes.list[5].dt).format('l');
     forecastIcon1.innerHTML = `<img src='https://openweathermap.org/img/w/${forecastRes.list[0].weather[0].icon}.png'>`;
-    forecastTemp1.textContent = 'Temp: ' + forecastRes.list[0].main.temp + ' F°';
-    forecastHumidity1.textContent = 'Humidity: ' + forecastRes.list[0].main.humidity + ' %';
-    forecastDate2.textContent = moment.unix(forecastRes.list[1].dt).format('l');
+    forecastTemp1.textContent = 'Temp: ' + forecastRes.list[5].main.temp + ' F°';
+    forecastHumidity1.textContent = 'Humidity: ' + forecastRes.list[5].main.humidity + ' %';
+    forecastDate2.textContent = moment.unix(forecastRes.list[13].dt).format('l');
     forecastIcon2.innerHTML = `<img src='https://openweathermap.org/img/w/${forecastRes.list[1].weather[0].icon}.png'>`
-    forecastTemp2.textContent = 'Temp: ' + forecastRes.list[1].main.temp + ' F°';
-    forecastHumidity2.textContent = 'Humidity: ' + forecastRes.list[1].main.humidity + ' %';
-    forecastDate3.textContent = moment.unix(forecastRes.list[2].dt).format('l');
+    forecastTemp2.textContent = 'Temp: ' + forecastRes.list[13].main.temp + ' F°';
+    forecastHumidity2.textContent = 'Humidity: ' + forecastRes.list[13].main.humidity + ' %';
+    forecastDate3.textContent = moment.unix(forecastRes.list[21].dt).format('l');
     forecastIcon3.innerHTML = `<img src='https://openweathermap.org/img/w/${forecastRes.list[2].weather[0].icon}.png'>`
-    forecastTemp3.textContent = 'Temp: ' + forecastRes.list[2].main.temp + ' F°';
-    forecastHumidity3.textContent = 'Humidity: ' + forecastRes.list[2].main.humidity + ' %';
-    forecastDate4.textContent = moment.unix(forecastRes.list[3].dt).format('l');
+    forecastTemp3.textContent = 'Temp: ' + forecastRes.list[21].main.temp + ' F°';
+    forecastHumidity3.textContent = 'Humidity: ' + forecastRes.list[21].main.humidity + ' %';
+    forecastDate4.textContent = moment.unix(forecastRes.list[29].dt).format('l');
     forecastIcon4.innerHTML = `<img src='https://openweathermap.org/img/w/${forecastRes.list[3].weather[0].icon}.png'>`
-    forecastTemp4.textContent = 'Temp: ' + forecastRes.list[3].main.temp + ' F°';
-    forecastHumidity4.textContent = 'Humidity: ' + forecastRes.list[3].main.humidity + ' %';
-    forecastDate5.textContent = moment.unix(forecastRes.list[4].dt).format('l');
+    forecastTemp4.textContent = 'Temp: ' + forecastRes.list[29].main.temp + ' F°';
+    forecastHumidity4.textContent = 'Humidity: ' + forecastRes.list[29].main.humidity + ' %';
+    forecastDate5.textContent = moment.unix(forecastRes.list[37].dt).format('l');
     forecastIcon5.innerHTML = `<img src='https://openweathermap.org/img/w/${forecastRes.list[4].weather[0].icon}.png'>`
-    forecastTemp5.textContent = 'Temp: ' + forecastRes.list[4].main.temp + ' F°';
-    forecastHumidity5.textContent = 'Humidity: ' + forecastRes.list[4].main.humidity + ' %';
+    forecastTemp5.textContent = 'Temp: ' + forecastRes.list[37].main.temp + ' F°';
+    forecastHumidity5.textContent = 'Humidity: ' + forecastRes.list[37].main.humidity + ' %';
 }
 
 generateButtons()

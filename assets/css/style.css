@@ -2,10 +2,29 @@ body {
     background-image: url('../images/city-weather-pic.PNG');
     background-size: cover;
     font-weight: bold;
+    color: black;
+}
+
+.yellow {
+    font-size: 72px;
+    background: -webkit-linear-gradient(yellow,orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* .rs-label {
+    margin-top: 2%;
+} */
+
+.white{
+    font-size: 72px;
+    background: -webkit-linear-gradient(#eee, rgba(104,163,240,1) );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .jumbotron-fluid {
-    padding:1%;
+    padding:2%;
     margin: 0%;
     text-align: center;
     font-weight: bold;
@@ -55,6 +74,7 @@ ul {
     background: linear-gradient(90deg, rgba(45,90,170,1) 12%, rgba(104,163,240,1) 52%, rgba(26,84,184,1) 91%);
     /* padding: 2px; */
     font-weight: bold;
+    color: black;
 }
 
 .search-form {
